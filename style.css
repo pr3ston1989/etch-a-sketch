@@ -4,9 +4,11 @@ body {
 
 .pixel {
     background-color: lightgrey;
+    opacity: 0.1;
 }
 
 #grid {
     height: 960px;
     width: 960px;
+    background-color: white;
 }

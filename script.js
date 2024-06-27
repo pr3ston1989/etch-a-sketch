@@ -19,15 +19,41 @@ function createGrid(gridSize) {
         }
         grid.appendChild(row);
     }
-    changeColor();
+    checkPixel();
 }
 
-function changeColor() {
+function checkPixel() {
     const pixels = document.querySelectorAll(".pixel");
 
     pixels.forEach(element => element.addEventListener('mouseover', event => {
-    element.style.backgroundColor = "black";
+    setColor(element);
+    increaseOpacity(element);
     }))
+}
+
+function increaseOpacity(element) {
+    const styles = window.getComputedStyle(element);
+    let opacity = styles.getPropertyValue("opacity");
+    if (opacity < 1) {
+        opacity = String(Number(opacity) + 0.1);
+        element.style.opacity = opacity;
+    }
+}
+
+function drawColor() {
+    let r = Math.round(Math.random() * 255);
+    let g = Math.round(Math.random() * 255);
+    let b = Math.round(Math.random() * 255);
+    return `rgb(${r},${g},${b})`
+}
+
+function setColor(element) {
+    const styles = window.getComputedStyle(element);
+    let color = styles.getPropertyValue("background-color");
+    if (color == "rgb(211, 211, 211)") {
+        color = drawColor();
+        element.style.backgroundColor = color;
+    }
 }
 
 createGrid(16);
